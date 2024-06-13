@@ -2,6 +2,7 @@ package com.mangkyu.stream.Quiz5;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Quiz5 {
 
@@ -34,7 +35,11 @@ public class Quiz5 {
 
     // 5.4 두 개의 주사위를 굴려서 나온 눈의 합이 6인 경우를 모두 출력하시오.
     public List<Integer[]> quiz4() {
-        return Collections.emptyList();
+        return IntStream.rangeClosed(1, 6)
+                .boxed()
+                .flatMap(i -> IntStream.rangeClosed(1, 6).boxed().map(j -> new Integer[]{i,j}))
+                .filter(arr -> arr[0] + arr[1] == 6)
+                .collect(Collectors.toList());
     }
 
 }
